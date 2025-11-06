@@ -9,8 +9,8 @@ jobs:
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel
       - run: 
-             python -m nbconvert --to pdf --execute mpdata_2d_numpy_only(6).ipynb
+             python -m nbconvert --to pdf --execute "mpdata_2d_numpy_only(6).ipynb"
       - uses: actions/upload-artifact@v4 
         with:
-          path: mpdata_2d_numpy_only(6).pdf
+          path: "mpdata_2d_numpy_only(6).pdf"
           
