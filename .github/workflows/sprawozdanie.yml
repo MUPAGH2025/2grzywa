@@ -1,1 +1,15 @@
 
+name: sprawozdanie
+on: push
+jobs: 
+  pdf:
+    runs-on: windows-latest
+    steps:
+      - run: winget install -e --id TeXLive.TeXLive && winget install -e --id Inkscape.Inkscape && winget install -e --id JohnMacFarlane.Pandoc
+      - uses: actions/checkout@v4
+      - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel
+      - run: python -m nbconvert --to pdf --execute test.ipynb 
+      - uses: actions/upload-artifact@v4 
+        with:
+          path: sprawozdanie.pdf
+          
