@@ -12,7 +12,7 @@ jobs:
           winget install --id=Inkscape.Inkscape --accept-source-agreements --accept-package-agreements
           winget install --id JohnMacFarlane.Pandoc --accept-source-agreements --accept-package-agreements
       - run: |
-            "C:\Program Files\MiKTeX\miktex\bin\x64\mpm.exe" --admin --verbose --install=xetex
+            & 'C:\Program Files\MiKTeX\miktex\bin\x64\mpm.exe' --verbose --install=xetex
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel
       - run: |
