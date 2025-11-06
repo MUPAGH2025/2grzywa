@@ -5,7 +5,8 @@ jobs:
   pdf:
     runs-on: windows-latest
     steps:
-      - run: winget source disable msstore
+      - run: winget source remove msstore
+      - run: winget source update
       - run: winget install -e --id TeXLive.TeXLive --accept-source-agreements --accept-package-agreements `
             && winget install -e --id Inkscape.Inkscape --accept-source-agreements --accept-package-agreements `
             && winget install -e --id JohnMacFarlane.Pandoc --accept-source-agreements --accept-package-agreements
