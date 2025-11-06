@@ -13,8 +13,9 @@ jobs:
           winget install --id JohnMacFarlane.Pandoc --accept-source-agreements --accept-package-agreements
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel
-      - run: echo "C:\Program Files\Inkscape\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-      - run: python -m nbconvert --to pdf --execute test.ipynb 
+      - run: |
+             $env:PATH += ";C:\Program Files\Inkscape\bin"
+             python -m nbconvert --to pdf --execute test.ipynbpython -m nbconvert --to pdf --execute test.ipynb 
       - uses: actions/upload-artifact@v4 
         with:
           path: test.pdf
