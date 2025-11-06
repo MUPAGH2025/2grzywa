@@ -12,7 +12,15 @@ jobs:
           winget install --id=Inkscape.Inkscape --accept-source-agreements --accept-package-agreements
           winget install --id JohnMacFarlane.Pandoc --accept-source-agreements --accept-package-agreements
       - run: |
-            & 'C:\Program Files\MiKTeX\miktex\bin\x64\mpm.exe' --verbose --install=xetex
+          $miktexPath = "$env:USERPROFILE\AppData\Local\Programs\MiKTeX\miktex\bin\x64"
+          if (Test-Path "$miktexPath\mpm.exe") {
+            & "$miktexPath\mpm.exe" --verbose --install=xetex
+          } else {
+            Write-Host "MiKTeX not found at $miktexPath"
+            Get-ChildItem -Path $env:USERPROFILE -Recurse -Filter mpm.exe -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object {
+              & "$($_.FullName)" --verbose --install=xetex
+            }
+          }
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel
       - run: |
