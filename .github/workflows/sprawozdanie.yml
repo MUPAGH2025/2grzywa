@@ -3,30 +3,14 @@ name: sprawozdanie
 on: push
 jobs: 
   pdf:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-      - run: winget source remove msstore
-      - run: winget source update
-      - run: |
-          winget install --id=MiKTeX.MiKTeX --accept-source-agreements --accept-package-agreements
-          winget install --id=Inkscape.Inkscape --accept-source-agreements --accept-package-agreements
-          winget install --id JohnMacFarlane.Pandoc --accept-source-agreements --accept-package-agreements
-      - run: |
-          $miktexPath = "$env:USERPROFILE\AppData\Local\Programs\MiKTeX\miktex\bin\x64"
-          if (Test-Path "$miktexPath\mpm.exe") {
-            & "$miktexPath\mpm.exe" --admin --verbose --install=xetex
-          } else {
-            Write-Host "MiKTeX not found at $miktexPath"
-            Get-ChildItem -Path $env:USERPROFILE -Recurse -Filter mpm.exe -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object {
-              & "$($_.FullName)" --verbose --install=xetex
-            }
-          }
+      - run: sudo apt-get install texlive-xetex inkscape pandoc 
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel
-      - run: |
-             $env:PATH += ";C:\Program Files\MiKTeX\miktex\bin\x64;C:\Program Files\Inkscape\bin"
-             python -m nbconvert --to pdf --execute test.ipynb
+      - run: 
+             python -m nbconvert --to pdf --execute mpdata_2d_numpy_only(6).ipynb
       - uses: actions/upload-artifact@v4 
         with:
-          path: test.pdf
+          path: mpdata_2d_numpy_only(6).pdf
           
