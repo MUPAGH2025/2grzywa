@@ -10,7 +10,7 @@ jobs:
       - run: |
           winget install --id=MiKTeX.MiKTeX --accept-source-agreements --accept-package-agreements
           winget install --id=Inkscape.Inkscape --accept-source-agreements --accept-package-agreements
-          winget install --id=Pandoc.Pandoc --accept-source-agreements --accept-package-agreements
+          winget install --id JohnMacFarlane.Pandoc --accept-source-agreements --accept-package-agreements
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel
       - run: python -m nbconvert --to pdf --execute test.ipynb 
