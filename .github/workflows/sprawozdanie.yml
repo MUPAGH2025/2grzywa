@@ -14,7 +14,7 @@ jobs:
       - run: |
           $miktexPath = "$env:USERPROFILE\AppData\Local\Programs\MiKTeX\miktex\bin\x64"
           if (Test-Path "$miktexPath\mpm.exe") {
-            & "$miktexPath\mpm.exe" --verbose --install=xetex
+            & "$miktexPath\mpm.exe" --admin --verbose --install=xetex
           } else {
             Write-Host "MiKTeX not found at $miktexPath"
             Get-ChildItem -Path $env:USERPROFILE -Recurse -Filter mpm.exe -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object {
