@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-              sudo apt-get install update
+              sudo apt-get update
               sudo apt-get install texlive-xetex inkscape pandoc 
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel pympdata
