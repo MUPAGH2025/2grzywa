@@ -10,8 +10,12 @@ jobs:
               sudo apt-get install texlive-xetex inkscape pandoc 
       - uses: actions/checkout@v4
       - run: pip install pint open_atmos_jupyter_utils scipy numpy pandas nbconvert ipykernel pympdata
-      - run: python -m nbconvert --to pdf --execute Raport.ipynb
+      - run: | 
+             python -m nbconvert --to pdf --execute Raport.ipynb
+             python -m nbconvert --to pdf --no-input Raport.ipynb --output Raport_no_code.pdf
       - uses: actions/upload-artifact@v4 
         with:
-          path: Raport.pdf
+          path: | 
+            Raport.pdf
+            Raport_no_code.pdf
           
